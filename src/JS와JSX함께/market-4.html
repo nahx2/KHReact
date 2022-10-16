@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="root"></div>
+    <script type="text/babel">
+      const root = document.getElementById("root");
+      const App = () => {
+        // 일반변수와 state의 차이는?
+        // 데이터가 변경이 일어나면 자동으로 재랜더링됨
+        // 배열의 일부만 수정시 얕은 배열 복사 코드를 사용할 것
+        let title = "책제목";
+        const [books, setbooks] = React.useState([
+          "자바의 정석",
+          "리액트의 정석",
+          "오라클의 정석",
+        ]);
+        const [publishs, setPublishs] = React.useState([
+          "5월 11일 출판",
+          "6월 11일 출판",
+          "7월 11일 출판",
+        ]);
+        let [like, setLike] = React.useState(0);
+        let [dislike, setDislike] = React.useState(0);
+        const add = () => {
+          setLike(like + 1);
+        };
+        const minus = () => {
+          setDislike(dislike + 1);
+        };
+        return (
+          <>
+            <div className="App">
+              <div className="list">
+                <h3>{books[0]}</h3>
+                <p>{publishs[0]}</p>
+              </div>
+            </div>
+          </>
+        );
+      };
+      ReactDOM.createRoot(root).render(<App />);
+    </script>
+  </body>
+</html>
