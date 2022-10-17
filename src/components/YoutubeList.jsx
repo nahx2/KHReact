@@ -34,8 +34,13 @@ const YoutubeList = ({ authLogic }) => {
   useEffect(() => {
     axios
       .get(
+<<<<<<< HEAD
         `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=10&key=AIzaSyDvqdPZWgzvtJvUp22554mEjgFmQ5CuIxw`
       ) //
+=======
+        `https://www.googleapis.com/youtube/v3/`
+      )
+>>>>>>> origin/main
       .then((result) => {
         setVideos(result.data.items)
       })
@@ -45,8 +50,13 @@ const YoutubeList = ({ authLogic }) => {
     console.log("search click....")
     axios
       .get(
+<<<<<<< HEAD
         `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${keyword}&key=AIzaSyDvqdPZWgzvtJvUp22554mEjgFmQ5CuIxw&type=video`
       ) //
+=======
+        `https://youtube.googleapis.com/youtube/v3/`
+      )
+>>>>>>> origin/main
       .then((result) => result.data)
       .then(
         (data) => data.items.map((item) => ({ ...item, id: item.id.videoId })) //얕은복사하기 -spread 연산자
