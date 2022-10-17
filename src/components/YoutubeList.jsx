@@ -35,7 +35,7 @@ const YoutubeList = ({ authLogic }) => {
   useEffect(() => {
     axios
       .get(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=10&key=AIzaSyCIS_v1-BdrTwGF2BQrGgPoiDd2u1A6XZw`
+        `https://www.googleapis.com/youtube/v3/`
       )
       .then((result) => {
         setVideos(result.data.items)
@@ -46,7 +46,7 @@ const YoutubeList = ({ authLogic }) => {
     console.log("serach click...")
     axios
       .get(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${keyword}&key=AIzaSyCIS_v1-BdrTwGF2BQrGgPoiDd2u1A6XZw&type=video`
+        `https://youtube.googleapis.com/youtube/v3/`
       )
       .then((result) => result.data)
       .then((data) =>
