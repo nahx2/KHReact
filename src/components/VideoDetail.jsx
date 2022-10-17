@@ -1,12 +1,11 @@
 import React from "react"
 import { PreDescription } from "./styles/YoutubeStyle"
 
-const VideoDetail = (video) => {
+const VideoDetail = ({ video }) => {
   return (
     <>
       <section>
         <iframe
-          id="ytplayer"
           type="text/html"
           width="100%"
           height="500px"

@@ -1,44 +1,48 @@
 import styled from "styled-components"
 
-export const VRLI = styled.li`
-  width: 50%;
-  padding: 2em;
-  list-style: none;
-`
-export const VRLIMG = styled.img`
-  width: 40%;
-  height: 90%;
-`
 export const VLUL = styled.ul`
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
   padding-left: 0;
   margin: 0;
+`
+
+export const VRLI = styled.li`
+  width: 50%;
+  padding: 0.2em;
+`
+export const VRIMG = styled.img`
+  width: 40%;
+  height: 90%;
 `
 export const VRVIDEODIV = styled.div`
   width: 100%;
   height: 100%;
-  display: flex;
+  display: flex; /* 비디오가 한줄에 출력됨 */
   align-items: center;
-  border: 1px solid lightgrey;
+  padding-left: 1rem;
+  border: 1px solid lightgray;
+  box-shadow: 3px 3px
   cursor: pointer;
-  transition: transform 250ms;
+  transition: transform 250ms ease-in;
   &:hover {
     transform: scale(1.02);
   }
 `
+
 export const VRCONTENTDIV = styled.div`
-  margin-left: 0.2em;
+  margin-left: 0.7em;
 `
 export const VRPTITLE = styled.p`
   margin: 10;
   font-size: 1.2rem;
 `
-export const VRPCHANNELTITLE = styled.p`
+export const VRPCHANNEL = styled.p`
   margin: 0;
   font-size: 1rem;
 `
+
 export const PreDescription = styled.pre`
-  white-space=pre-wrap; /* 코드 줄바꿈 없이도 자동줄바꿈 */
+  white-space: pre-wrap; /* 코드 줄바꿈 없어도 자동줄바꿈  */
 `

@@ -4,6 +4,7 @@ import HackerFooter from "../page/HackerFooter"
 import DeptRow from "./DeptRow"
 import HackerHeader from "../page/HackerHeader"
 import { jsonDeptList } from "../service/dbLogic"
+import "../../css/dept.css"
 
 // 직접 구조분해 할당 해버리기~~
 const DeptList = ({ authLogic, pictureUpload }) => {
@@ -68,6 +69,19 @@ const DeptList = ({ authLogic, pictureUpload }) => {
       "http://localhost:9000/dept/deptInsert"
     document.querySelector("#f_dept").submit()
   }
+  const reactSearch = () => {
+    //deptno, dname, loc 컬럼명을 저장함
+    const gubun = document.querySelector("#gubun").value
+    const keyword = document.querySelector("#keyword").value
+    console.log(gubun + "," + keyword)
+    const asyncDB = async () => {
+      const res = await jsonDeptList({ gubun: gubun, keyword: keyword })
+      if (res.data) {
+        console.log(res.data)
+      }
+    }
+    asyncDB()
+  }
   return (
     <>
       <HackerHeader userId={userId} onLogout={onLogout} />
@@ -78,6 +92,31 @@ const DeptList = ({ authLogic, pictureUpload }) => {
             <small>부서목록</small>
           </h2>
           <hr />
+        </div>
+        <div className="row">
+          <div className="col-3">
+            <div className="form-floating">
+              <select id="gubun" className="form-select" aria-label="분류선택">
+                <option defaultValue>분류선택</option>
+                <option value="deptno">부서번호</option>
+                <option value="dname">부서명</option>
+                <option value="loc">지역</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="col-6">
+          <input
+            id="keyword"
+            type="text"
+            className="form-control"
+            placeholder="검색어를 입력하세요"
+          />
+        </div>
+        <div className="col-3">
+          <Button className="btn_search" variant="danger" onClick={reactSearch}>
+            검색
+          </Button>
         </div>
         <Table striped bordered hover>
           <thead>

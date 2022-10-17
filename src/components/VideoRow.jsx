@@ -1,10 +1,10 @@
 import React from "react"
 import {
   VRCONTENTDIV,
+  VRIMG,
   VRLI,
-  VRLIMG,
-  VRPCHANNELTITLE,
   VRPTITLE,
+  VRPCHANNEL,
   VRVIDEODIV,
 } from "./styles/YoutubeStyle"
 
@@ -13,13 +13,13 @@ function VideoRow({ video, videoSelect }) {
     <>
       <VRLI onClick={() => videoSelect(video)}>
         <VRVIDEODIV>
-          <VRLIMG
+          <VRIMG
             src={video.snippet.thumbnails.medium.url}
             alt="video thumbnail"
           />
           <VRCONTENTDIV>
             <VRPTITLE>{video.snippet.title}</VRPTITLE>
-            <VRPCHANNELTITLE>{video.snippet.channelTitle}</VRPCHANNELTITLE>
+            <VRPCHANNEL>{video.snippet.channelTitle}</VRPCHANNEL>
           </VRCONTENTDIV>
         </VRVIDEODIV>
       </VRLI>

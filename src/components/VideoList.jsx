@@ -9,7 +9,7 @@ const VideoList = (props) => {
     <>
       <VLUL>
         {videos.map((video, i) => (
-          <VideoRow key={video.id} video={video} />
+          <VideoRow key={video.id} video={video} videoSelect={videoSelect} />
         ))}
       </VLUL>
     </>
