@@ -7,6 +7,7 @@ import DeptList from "./components/dept/DeptList"
 import "./css/dept.css"
 import DeptDetail from "./components/dept/DeptDetail"
 import YoutubeList from "./components/YoutubeList"
+import NoticeList from "./components/notice/NoticeList"
 
 const App = ({ authLogic, pictureUpload }) => {
   return (
@@ -16,6 +17,11 @@ const App = ({ authLogic, pictureUpload }) => {
           path="/"
           exact={true}
           element={<LoginPage authLogic={authLogic} />}
+        />
+        <Route
+          path="/notice"
+          exact={true}
+          element={<NoticeList authLogic={authLogic} />}
         />
         <Route
           path="/dept"

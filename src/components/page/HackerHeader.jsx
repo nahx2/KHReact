@@ -19,6 +19,9 @@ const HackerHeader = ({ userId, onLogout }) => {
               <Link to="/" className="nav-link">
                 Home
               </Link>
+              <Link to="/notice" className="nav-link">
+                공지사항
+              </Link>
               <Link to="/hackernews" className="nav-link">
                 해커뉴스
               </Link>
