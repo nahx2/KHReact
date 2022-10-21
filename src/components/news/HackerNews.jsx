@@ -3,7 +3,15 @@ import { useNavigate, useParams } from "react-router-dom"
 import HackerHeader from "../page/HackerHeader"
 import HackerFooter from "../page/HackerFooter"
 import HackerNewsRow from "../news/HackerNewsRow"
-const HackerNews = ({ authLogic, pictureUpload }) => {
+import MyPagination from "../MyPagination"
+const HackerNews = ({
+  newList,
+  paginate,
+  newsPerPage,
+  totalNews,
+  authLogic,
+  pictureUpload,
+}) => {
   const { userId } = useParams()
   const navigate = useNavigate()
   console.log("구글 인증 아이디 : " + userId)
@@ -26,15 +34,7 @@ const HackerNews = ({ authLogic, pictureUpload }) => {
   //없으면? 모든 변화에 반응해
   //[] 있는데 파라미터가 없으면 처음에 한 번만....
   //[keyword] 키워드가 변경될 때마다 재귀호출일어남
-  useEffect(() => {
-    fetch("https://api.hnpwa.com/v0/news/1.json", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result)
-        setNewsList(result)
-      })
-      .catch((error) => console.log("error", error))
-  }, [])
+
   return (
     <>
       <HackerHeader userId={userId} onLogout={onLogout} />
@@ -46,6 +46,11 @@ const HackerNews = ({ authLogic, pictureUpload }) => {
             pictureUpload={pictureUpload}
           />
         ))}
+        <MyPagination
+          paginate={paginate}
+          newsPerPage={newsPerPage}
+          totalNews={newsList.length}
+        />
       </div>
       <HackerFooter />
     </>

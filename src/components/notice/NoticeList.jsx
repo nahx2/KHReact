@@ -49,7 +49,7 @@ const NoticeList = (props) => {
     1: {
       n_no: 1,
       n_title: "공휴일 공지",
-      n_writer: "관리자",
+      n_writer: "산하",
       n_date: "2022-10-11",
     },
     2: {
@@ -65,7 +65,33 @@ const NoticeList = (props) => {
       n_date: "2022-10-11",
     },
   })
-  const noticeSearch = () => {}
+  const noticeSearch = () => {
+    const gubun = document.querySelector("#gubun").value
+    const keyword = document.querySelector("#keyword").value
+    console.log(gubun + "," + keyword)
+    let result = []
+    if (gubun === "n_title") {
+      Object.keys(notices).map((key) =>
+        notices[key].n_title && notices[key].n_title === keyword
+          ? result.push(notice[key])
+          : null
+      )
+    } else if (gubun === "n_writer") {
+      Object.keys(notices).map((key) =>
+        notices[key].n_writer && notices[key].n_writer === keyword
+          ? result.push(notice[key])
+          : null
+      )
+    } else if (gubun === "n_content") {
+      Object.keys(notices).map((key) =>
+        notices[key].n_content && notices[key].n_content === keyword
+          ? result.push(notice[key])
+          : null
+      )
+    }
+    // 배열 result에는 조건 검색 결과가 담김
+    setNotices(result)
+  }
   const noticeInsert = (event) => {
     //submit사용시 페이지 새로고침 처리 방어코드 삽입 - 주의
     event.preventDefault() //이벤트 버블링 방어코드 삽입할 것
@@ -73,22 +99,7 @@ const NoticeList = (props) => {
     handleClose()
     set(ref(database, "notice/" + notice.n_no), notice)
   }
-  const send = (event) => {
-    if (event.key === "Enter") {
-      //submit속성 사용시 반드시 아래코드 추가할것.- 버블링 방지- 주의할것
-      event.preventDefault()
-      //사용자가 입력해서 제출하고 나면 폼 리셋되도록해줌
-      formRef.current.reset()
-      set(ref(database, "notice/" + notice.n_no), notice)
-    }
-  }
-  const handleSend = (event) => {
-    //submit속성 사용시 반드시 아래코드 추가할것.- 버블링 방지- 주의할것
-    event.preventDefault()
-    //사용자가 입력해서 제출하고 나면 폼 리셋되도록해줌
-    formRef.current.reset()
-    set(ref(database, "notice/" + notice.n_no), notice)
-  }
+
   const handleChangeForm = (event) => {
     if (event.currentTarget == null) return
     console.log("폼 내용 변경 발생 name : " + event.target.name)
@@ -100,6 +111,10 @@ const NoticeList = (props) => {
       m_no: Date.now(),
       [event.target.name]: event.target.value,
     })
+  }
+  const noticeList = () => {
+    console.log("noticeList")
+    window.location.reload()
   }
   return (
     <>
@@ -118,9 +133,9 @@ const NoticeList = (props) => {
             <div className="form-floating">
               <select id="gubun" className="form-select" aria-label="분류선택">
                 <option defaultValue>분류선택</option>
-                <option value="deptno">부서번호</option>
-                <option value="dname">부서명</option>
-                <option value="loc">지역</option>
+                <option value="n_title">제목</option>
+                <option value="n_writer">작성자</option>
+                <option value="n_content">내용</option>
               </select>
             </div>
           </div>
