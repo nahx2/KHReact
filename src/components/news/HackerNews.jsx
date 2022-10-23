@@ -1,21 +1,21 @@
 import React, { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import HackerHeader from "../page/HackerHeader"
-import HackerFooter from "../page/HackerFooter"
-import HackerNewsRow from "../news/HackerNewsRow"
 import MyPagination from "../MyPagination"
+import HackerFooter from "../page/HackerFooter"
+import HackerHeader from "../page/HackerHeader"
+import HackerNewsRow from "./HackerNewsRow"
+
 const HackerNews = ({
-  newList,
-  paginate,
+  newsList,
   newsPerPage,
   totalNews,
+  paginate,
   authLogic,
   pictureUpload,
 }) => {
   const { userId } = useParams()
   const navigate = useNavigate()
   console.log("구글 인증 아이디 : " + userId)
-  const [newsList, setNewsList] = React.useState([])
   const onLogout = () => {
     console.log("onLogout 호출 성공")
     authLogic.logout()
@@ -47,9 +47,9 @@ const HackerNews = ({
           />
         ))}
         <MyPagination
-          paginate={paginate}
           newsPerPage={newsPerPage}
-          totalNews={newsList.length}
+          totalNews={totalNews}
+          paginate={paginate}
         />
       </div>
       <HackerFooter />

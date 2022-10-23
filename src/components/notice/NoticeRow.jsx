@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const NoticeRow = ({ notice }) => {
+function NoticeRow({ notice }) {
   return (
     <>
       <tr>

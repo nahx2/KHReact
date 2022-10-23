@@ -13,14 +13,14 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 const App = ({ authLogic, pictureUpload }) => {
-  //페ㅣ징처리추가
-  const [newsList, setNewsList] = useState([])
+  // 페이징 처리 추가
+  const [newsList, setNewList] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
-  const [newsPerPage, setNewsPerPage] = useState(7)
+  const [newsPerPage, setNewsPerPage] = useState(3)
   const NEWS_URL = "https://api.hnpwa.com/v0/news/1.json"
   useEffect(() => {
     axios.get(NEWS_URL).then((response) => {
-      setNewsList(response.data)
+      setNewList(response.data)
     })
   }, [])
   const indexOfLast = currentPage * newsPerPage
@@ -37,6 +37,30 @@ const App = ({ authLogic, pictureUpload }) => {
           path="/"
           exact={true}
           element={<LoginPage authLogic={authLogic} />}
+        />
+        <Route
+          path="/hackernews/:userId"
+          exact={true}
+          element={
+            <HackerNews
+              newsList={currentNews(newsList)}
+              paginate={setCurrentPage}
+              newsPerPage={newsPerPage}
+              totalNews={newsList.length}
+              authLogic={authLogic}
+              pictureUpload={pictureUpload}
+            />
+          }
+        />
+        <Route
+          path="/newsreple/:id"
+          exact={true}
+          element={<HackerNewsReple />}
+        />
+        <Route
+          path="/youtube"
+          exact={true}
+          element={<YoutubeList authLogic={authLogic} />}
         />
         <Route
           path="/notice"
@@ -56,33 +80,9 @@ const App = ({ authLogic, pictureUpload }) => {
           }
         />
         <Route
-          path="/hackernews/:userId"
-          exact={true}
-          element={
-            <HackerNews
-              newList={currentNews(newsList)}
-              paginate={setCurrentPage}
-              newsPerPage={newsPerPage}
-              totalNews={newsList.length}
-              authLogic={authLogic}
-              pictureUpload={pictureUpload}
-            />
-          }
-        />
-        <Route
           path="/deptdetail/:deptno"
           exact={true}
           element={<DeptDetail />}
-        />
-        <Route
-          path="/newsreple/:id"
-          exact={true}
-          element={<HackerNewsReple />}
-        />
-        <Route
-          path="/youtube"
-          exact={true}
-          element={<YoutubeList authLogic={authLogic} />}
         />
       </Routes>
     </>

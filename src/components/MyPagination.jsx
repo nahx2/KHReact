@@ -14,6 +14,7 @@ const PageUl = styled.ul`
   border-bottom: 3px solid #ffc444;
   background-color: rgba(78, 77, 77, 0.4);
 `
+
 const PageLi = styled.li`
   display: inline-block;
   font-size: 17px;
@@ -31,6 +32,7 @@ const PageLi = styled.li`
     background-color: #266c3b;
   }
 `
+
 const PageSpan = styled.span`
   &:hover::after,
   &:focus::after {
@@ -40,9 +42,10 @@ const PageSpan = styled.span`
   }
 `
 
-const MyPagination = ({ newsPrePage, totalNews, paginate }) => {
+function MyPagination({ newsPerPage, totalNews, paginate }) {
+  // 페이징 처리에 필요한 숫자를 담을 배열 선언
   const pageNumbers = []
-  for (let i = 0; i <= Math.ceil(totalNews / newsPrePage); i++) {
+  for (let i = 1; i <= Math.ceil(totalNews / newsPerPage); i++) {
     pageNumbers.push(i)
   }
   return (
