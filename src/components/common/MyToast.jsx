@@ -1,4 +1,8 @@
 import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import styled from "styled-components"
+import { setToastFalse } from "../../store"
+import "./toast.css"
 
 const ToastDIV = styled.div`
   visibility: hidden;
@@ -16,7 +20,10 @@ const ToastDIV = styled.div`
   font-size: 17px;
 `
 
-const MyToast = (props) => {
+const MyToast = () => {
+  const status = useSelector((store) => store.status)
+  const msg = useSelector((store) => store.msg)
+  const dispatch = useDispatch()
   useEffect(() => {
     if (true) {
       let snackbar = document.getElementById("snackbar")
@@ -26,12 +33,12 @@ const MyToast = (props) => {
       }, 3000)
       //insert here
       setTimeout(() => {
-        //insert here
-      }, 2500)
+        dispatch(setToastFalse())
+      }, 5500)
     }
-  })
+  }, [status, dispatch])
 
-  return <ToastDIV id="snackbar">토스트메시지출력</ToastDIV>
+  return <ToastDIV id="snackbar">{JSON.stringify(msg)}</ToastDIV>
 }
 
 export default MyToast

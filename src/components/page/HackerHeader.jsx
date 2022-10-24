@@ -3,9 +3,12 @@ import { Button } from "react-bootstrap"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { logout2 } from "../service/authLogic"
 
 const HackerHeader = ({ userId, onLogout }) => {
+  const auth = useSelector((store) => store.auth)
   //const HackerHeader = (props) => {
   //const { userId, onLogout } = props;
   return (
@@ -25,6 +28,9 @@ const HackerHeader = ({ userId, onLogout }) => {
               <Link to="/hackernews" className="nav-link">
                 해커뉴스
               </Link>
+              <Link to="/board" className="nav-link">
+                DB게시판
+              </Link>
               <Link to="/dept" className="nav-link">
                 부서목록
               </Link>
@@ -33,7 +39,13 @@ const HackerHeader = ({ userId, onLogout }) => {
               </Link>
             </Nav>
             {onLogout && (
-              <Button variant="dark" onClick={onLogout}>
+              <Button
+                variant="dark"
+                onClick={() => {
+                  logout2(auth)
+                  window.location.reload()
+                }}
+              >
                 Logout
               </Button>
             )}

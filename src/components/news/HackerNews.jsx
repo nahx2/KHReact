@@ -1,5 +1,8 @@
 import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
+import { setToastMsg } from "../../store"
+import MyToast from "../common/MyToast"
 import MyPagination from "../MyPagination"
 import HackerFooter from "../page/HackerFooter"
 import HackerHeader from "../page/HackerHeader"
@@ -14,6 +17,15 @@ const HackerNews = ({
   pictureUpload,
 }) => {
   const { userId } = useParams()
+  const status = useSelector((store) => store.status)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    if (userId !== null && userId.length > 0) {
+      dispatch(setToastMsg("님 회원"))
+    } else {
+      dispatch(setToastMsg("님 비회원"))
+    }
+  }, [])
   const navigate = useNavigate()
   console.log("구글 인증 아이디 : " + userId)
   const onLogout = () => {
@@ -39,6 +51,7 @@ const HackerNews = ({
     <>
       <HackerHeader userId={userId} onLogout={onLogout} />
       <div>
+        {status && <MyToast />}
         {newsList.map((news) => (
           <HackerNewsRow
             key={news.id}
