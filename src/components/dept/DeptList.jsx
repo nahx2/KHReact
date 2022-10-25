@@ -5,6 +5,7 @@ import DeptRow from "./DeptRow"
 import HackerHeader from "../page/HackerHeader"
 import { jsonDeptList } from "../service/dbLogic"
 import "../../css/dept.css"
+import { reload } from "firebase/auth"
 
 // 직접 구조분해 할당 해버리기~~
 const DeptList = ({ authLogic, pictureUpload }) => {
